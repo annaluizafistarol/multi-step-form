@@ -6,37 +6,53 @@
   box-sizing: border-box;
 }
 
-/* The designs were created to the following widths:
-  - Mobile: 375px
-  - Desktop: 1440px */
-
+/*
+  The designs were created to the following widths:
+    - Mobile: 375px
+    - Desktop: 1440px
+*/
 :root {
   /* TYPOGRAPHY */
   --font-ubuntu: 'Ubuntu', sans-serif;
-  --size-font: 16px;
+  --size-font: 16px; /* Paragraph */
   --regular-weigth: 400;
   --medium-weigth: 500;
   --bold-weigth: 700;
 
   /* PRIMARY COLORS */
-  --primary-marine-blue: hsl(213, 96%, 18%);
-  --primary-purplish-blue: hsl(243, 100%, 62%);
-  --primary-pastel-blue: hsl(228, 100%, 84%);
-  --primary-light-blue: hsl(206, 94%, 87%);
-  --primary-strawberry-red: hsl(354, 84%, 57%);
+  --primary-blue-950: #02295aff;
+  --primary-purple-600: #473dffff;
+  --primary-blue-300: #adbeffff;
+  --primary-blue-200: #bfe2fdff;
+  --primary-red-500: #ed3548ff;
 
   /* NEUTRAL COLORS */
-  --neutral-cool-gray: hsl(231, 11%, 63%);
-  --neutral-light-gray: hsl(229, 24%, 87%);
-  --neutral-magnolia: hsl(217, 100%, 97%);
-  --neutral-alabaster: hsl(231, 100%, 99%);
-  --neutral-white: hsl(0, 0%, 100%);
+  --neutral-grey-500: #9699abff;
+  --neutral-purple-200: #d6d9e6ff;
+  --neutral-blue-100: #f0f5ffff;
+  --neutral-blue-50: #fafbffff;
+  --neutral-White: #ffffffff;
 }
 
 body {
   font-size: var(--size-font);
-  margin: 0;
   font-family: var(--font-ubuntu);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  display: flex;
+  place-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  text-align: center;
 }
