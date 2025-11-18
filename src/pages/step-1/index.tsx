@@ -1,3 +1,4 @@
+import StepsMenu from '@components/StepsMenu'
 import { JSX } from 'react'
 
 /**
@@ -6,5 +7,5 @@ import { JSX } from 'react'
  * @returns {JSX.Element} The JSX element representing the Step 4 page.
  */
 export default function Step1(): JSX.Element {
-  return <h1>Step 1</h1>
+  return <StepsMenu />
 }
