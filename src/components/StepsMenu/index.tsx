@@ -1,6 +1,6 @@
 import { useFormContext } from '@utils/context/FormContext/useFormContext'
 import { JSX } from 'react/jsx-runtime'
-import style from './style.module.css'
+import style from './stepsMenu.module.css'
 
 /**
  * StepsMenu Component
