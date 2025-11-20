@@ -8,17 +8,11 @@ import styles from './StepContainer.module.css'
  * @description This is the StepContainer component of the application.
  * @returns {JSX.Element} The JSX element representing the StepContainer component.
  */
-export default function StepContainer({
-  children,
-  nextStep,
-}: {
-  children: React.ReactNode
-  nextStep: (step: number) => void
-}): JSX.Element {
+export default function StepContainer(): JSX.Element {
   return (
     <div className={styles.stepContainer}>
       <StepsMenu />
-      <StepsContent children={children} nextStep={nextStep} />
+      <StepsContent />
     </div>
   )
 }

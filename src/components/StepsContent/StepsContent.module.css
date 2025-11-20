@@ -67,7 +67,8 @@
 }
 
 .backButton:hover,
-.backButton:active {
+.backButton:active,
+.backButton:focus-visible {
   color: var(--primary-blue-950) !important;
   background: transparent !important;
 }
@@ -79,7 +80,8 @@
 }
 
 .nextButton:hover,
-.nextButton:active {
+.nextButton:active,
+.nextButton:focus-visible {
   color: var(--neutral-white) !important;
   background: #174a89 !important;
 }
@@ -91,7 +93,8 @@
 }
 
 .confirmButton:hover,
-.confirmButton:active {
+.confirmButton:active,
+.confirmButton:focus-visible {
   background: #938cfc;
 }
 

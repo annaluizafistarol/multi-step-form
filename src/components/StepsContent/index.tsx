@@ -1,5 +1,7 @@
 import { useFormContext } from '@utils/context/FormContext/useFormContext'
-import { JSX } from 'react/jsx-runtime'
+import { useNavigate } from 'react-router-dom'
+import { JSX, useState } from 'react'
+import FirstStep from '@components/FirstStep'
 import styles from './stepsContent.module.css'
 
 /**
@@ -7,57 +9,102 @@ import styles from './stepsContent.module.css'
  * @description This is the StepsContent component of the application.
  * @returns {JSX.Element} The JSX element representing the StepsContent component.
  */
-export default function StepsContent({
-  children,
-  nextStep,
-}: {
-  children: React.ReactNode
-  nextStep: (step: number) => void
-}): JSX.Element {
-  const { currentStep } = useFormContext()
+export default function StepsContent(): JSX.Element {
+  const { currentStep, formData, setCurrentStep } = useFormContext()
+  const [needValidateToNextStep, setNeedValidateToNextStep] = useState(false)
+  const navigate = useNavigate()
+
+  function goToNext() {
+    const step = content[currentStep - 1]
+
+    const isValid = step.validate()
+
+    if (!isValid) {
+      return
+    }
+
+    const next = currentStep + 1
+
+    setCurrentStep(next)
+    navigate(`/step-${next}`)
+  }
+
   const content = [
     {
-      stepNumber: 1,
       stepTitle: 'Personal info',
       stepDescription: 'Please provide your name, email address, and phone number.',
+      children: (
+        <FirstStep
+          needValidateToNextStep={needValidateToNextStep}
+          setNeedValidateToNextStep={setNeedValidateToNextStep}
+        />
+      ),
+      validate: () => {
+        setNeedValidateToNextStep(true)
+
+        if (
+          !formData.name.trim() ||
+          !formData.email.trim() ||
+          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) ||
+          !formData.phone.trim() ||
+          !/^[0-9+\-\s]{6,20}$/.test(formData.phone)
+        ) {
+          return false
+        }
+
+        return true
+      },
     },
     {
-      stepNumber: 2,
       stepTitle: 'Select your plan',
       stepDescription: 'You have the option of monthly or yearly billing.',
+      children: <div />,
+      validate: () => !!formData.plan,
     },
     {
-      stepNumber: 3,
       stepTitle: 'Pick add-ons',
       stepDescription: 'Add-ons help enhance your gaming experience.',
+      children: <div />,
+      validate: () => formData.addons.length > 0,
     },
     {
-      stepNumber: 4,
       stepTitle: 'Finishing up',
       stepDescription: 'Double-check everything looks OK before confirming.',
+      children: <div />,
+      validate: () => true,
     },
   ]
+
+  const step = content[currentStep - 1]
 
   return (
     <section className={styles.stepsContentSection}>
       <div className={styles.stepsContentDiv}>
         <div className={styles.stepsContent}>
-          <h2 className={styles.stepTitle}>{content[currentStep - 1].stepTitle}</h2>
-          <p className={styles.stepDescription}>{content[currentStep - 1].stepDescription}</p>
+          <h2 className={styles.stepTitle}>{step.stepTitle}</h2>
+          <p className={styles.stepDescription}>{step.stepDescription}</p>
 
-          <div className={styles.stepContentChildren}>{children}</div>
+          <div className={styles.stepContentChildren}>{step.children}</div>
         </div>
 
         <div className={styles.stepsButtons}>
           {currentStep > 1 && (
-            <button type="button" onClick={() => window.history.back()} className={styles.backButton}>
+            <button
+              type="button"
+              onClick={() => {
+                const prev = currentStep - 1
+                setCurrentStep(prev)
+                navigate(`/step-${prev}`)
+              }}
+              className={styles.backButton}
+            >
               Go Back
             </button>
           )}
 
           <button
             type="button"
-            onClick={() => nextStep(currentStep)}
+            onClick={goToNext}
             className={currentStep < 4 ? styles.nextButton : styles.confirmButton}
           >
             {currentStep < 4 ? 'Next Step' : 'Confirm'}

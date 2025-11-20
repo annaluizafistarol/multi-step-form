@@ -7,5 +7,5 @@ import { JSX } from 'react'
  * @returns {JSX.Element} The JSX element representing the Step 4 page.
  */
 export default function Step1(): JSX.Element {
-  return <StepContainer nextStep={() => {}} children={<h1>Step 1</h1>} />
+  return <StepContainer />
 }
