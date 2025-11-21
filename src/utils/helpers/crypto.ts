@@ -30,12 +30,12 @@ export async function encrypt(data: object) {
 /**
  * Decrypt data
  */
-export async function decrypt(payload: { iv: number[]; data: number[] }) {
+export async function decrypt(payload: { initializationVector: number[]; data: number[] }) {
   try {
     const key = await getCryptoKey()
 
     const decrypted = await crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv: new Uint8Array(payload.iv) },
+      { name: 'AES-GCM', iv: new Uint8Array(payload.initializationVector) },
       key,
       new Uint8Array(payload.data)
     )

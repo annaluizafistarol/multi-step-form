@@ -2,6 +2,7 @@ import { useFormContext } from '@utils/context/FormContext/useFormContext'
 import { useNavigate } from 'react-router-dom'
 import { JSX, useState } from 'react'
 import FirstStep from '@components/FirstStep'
+import SecondStep from '@components/SecondStep'
 import styles from './stepsContent.module.css'
 
 /**
@@ -58,8 +59,21 @@ export default function StepsContent(): JSX.Element {
     {
       stepTitle: 'Select your plan',
       stepDescription: 'You have the option of monthly or yearly billing.',
-      children: <div />,
-      validate: () => !!formData.plan,
+      children: (
+        <SecondStep
+          needValidateToNextStep={needValidateToNextStep}
+          setNeedValidateToNextStep={setNeedValidateToNextStep}
+        />
+      ),
+      validate: () => {
+        setNeedValidateToNextStep(true)
+
+        if (!formData.plan) {
+          return false
+        }
+
+        return true
+      },
     },
     {
       stepTitle: 'Pick add-ons',

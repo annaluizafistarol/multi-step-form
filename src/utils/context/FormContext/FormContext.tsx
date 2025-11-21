@@ -33,7 +33,10 @@ export default function FormProvider({ children }: { children: ReactNode }): JSX
     try {
       const parsed = JSON.parse(saved)
 
-      decrypt(parsed)
+      decrypt({
+        initializationVector: parsed.initializationVector,
+        data: parsed.data,
+      })
         .then((result) => {
           if (result) {
             setFormData(result)
