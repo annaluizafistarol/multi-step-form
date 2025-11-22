@@ -5,7 +5,7 @@ import FirstStep from '@components/FirstStep'
 import SecondStep from '@components/SecondStep'
 import ThirdStep from '@components/ThirdStep'
 import FourthStep from '@components/FourthStep'
-import styles from './stepsContent.module.css'
+import styles from './StepsContent.module.css'
 
 /**
  * StepsContent Component
