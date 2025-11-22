@@ -28,15 +28,15 @@ export default function SecondStep({
       return
     }
 
-    const newErrors: typeof errors = {}
-
     if (!formData.plan) {
-      newErrors.plan = 'Select your plan to proceed'
+      setErrors({ plan: 'Select your plan to proceed' })
+    } else {
+      setErrors({})
     }
 
-    setErrors(newErrors)
     setNeedValidateToNextStep(false)
-  }, [needValidateToNextStep, formData, setNeedValidateToNextStep])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [needValidateToNextStep])
 
   return (
     <form className={styles.secondStep} noValidate>

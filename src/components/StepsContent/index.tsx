@@ -1,9 +1,10 @@
 import { useFormContext } from '@utils/context/FormContext/useFormContext'
-import { useNavigate } from 'react-router-dom'
-import { JSX, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { JSX, useEffect, useState, useCallback } from 'react'
 import FirstStep from '@components/FirstStep'
 import SecondStep from '@components/SecondStep'
 import ThirdStep from '@components/ThirdStep'
+import FourthStep from '@components/FourthStep'
 import styles from './stepsContent.module.css'
 
 /**
@@ -13,20 +14,75 @@ import styles from './stepsContent.module.css'
  */
 export default function StepsContent(): JSX.Element {
   const { currentStep, formData, setCurrentStep } = useFormContext()
-  const [needValidateToNextStep, setNeedValidateToNextStep] = useState(false)
+  const [stepsValidation, setStepsValidation] = useState({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+  })
+
   const navigate = useNavigate()
+  const location = useLocation()
+
+  const getAllowedStep = useCallback(() => {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
+      return 1
+    }
+
+    if (!formData.plan) {
+      return 2
+    }
+
+    if (formData.addons.length === 0) {
+      return 3
+    }
+
+    return 4
+  }, [formData])
+
+  useEffect(() => {
+    const match = location.pathname.match(/step-(\d+)/)
+
+    if (match) {
+      const routeStep = Number(match[1])
+
+      if (routeStep !== currentStep) {
+        setCurrentStep(routeStep)
+      }
+    } else {
+      if (currentStep !== 1) {
+        setCurrentStep(1)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname])
+
+  useEffect(() => {
+    const match = location.pathname.match(/step-(\d+)/)
+    const routeStep = match ? Number(match[1]) : 1
+    const allowedStep = getAllowedStep()
+
+    if (routeStep > allowedStep) {
+      setCurrentStep(allowedStep)
+      navigate(`/step-${allowedStep}`, { replace: true })
+    } else if (routeStep !== currentStep) {
+      setCurrentStep(routeStep)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname, currentStep, formData, navigate, getAllowedStep])
 
   function goToNext() {
     const step = content[currentStep - 1]
-
     const isValid = step.validate()
 
     if (!isValid) {
+      setStepsValidation((prev) => ({ ...prev, [currentStep]: true }))
       return
     }
 
-    const next = currentStep + 1
+    setStepsValidation((prev) => ({ ...prev, [currentStep]: true }))
 
+    const next = currentStep + 1
     setCurrentStep(next)
     navigate(`/step-${next}`)
   }
@@ -37,24 +93,16 @@ export default function StepsContent(): JSX.Element {
       stepDescription: 'Please provide your name, email address, and phone number.',
       children: (
         <FirstStep
-          needValidateToNextStep={needValidateToNextStep}
-          setNeedValidateToNextStep={setNeedValidateToNextStep}
+          needValidateToNextStep={stepsValidation[1]}
+          setNeedValidateToNextStep={(v) => setStepsValidation((prev) => ({ ...prev, 1: v }))}
         />
       ),
       validate: () => {
-        setNeedValidateToNextStep(true)
-
-        if (
-          !formData.name.trim() ||
-          !formData.email.trim() ||
-          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) ||
-          !formData.phone.trim() ||
-          !/^[0-9+\-\s]{6,20}$/.test(formData.phone)
-        ) {
-          return false
-        }
-
-        return true
+        return (
+          !!formData.name.trim() &&
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
+          /^[0-9+\-\s]{6,20}$/.test(formData.phone)
+        )
       },
     },
     {
@@ -62,19 +110,11 @@ export default function StepsContent(): JSX.Element {
       stepDescription: 'You have the option of monthly or yearly billing.',
       children: (
         <SecondStep
-          needValidateToNextStep={needValidateToNextStep}
-          setNeedValidateToNextStep={setNeedValidateToNextStep}
+          needValidateToNextStep={stepsValidation[2]}
+          setNeedValidateToNextStep={(v) => setStepsValidation((prev) => ({ ...prev, 2: v }))}
         />
       ),
-      validate: () => {
-        setNeedValidateToNextStep(true)
-
-        if (!formData.plan) {
-          return false
-        }
-
-        return true
-      },
+      validate: () => !!formData.plan,
     },
     {
       stepTitle: 'Pick add-ons',
@@ -85,7 +125,7 @@ export default function StepsContent(): JSX.Element {
     {
       stepTitle: 'Finishing up',
       stepDescription: 'Double-check everything looks OK before confirming.',
-      children: <div />,
+      children: <FourthStep />,
       validate: () => true,
     },
   ]
@@ -119,7 +159,7 @@ export default function StepsContent(): JSX.Element {
 
           <button
             type="button"
-            onClick={goToNext}
+            onClick={currentStep < 4 ? goToNext : () => navigate('/thank-you')}
             className={currentStep < 4 ? styles.nextButton : styles.confirmButton}
           >
             {currentStep < 4 ? 'Next Step' : 'Confirm'}
