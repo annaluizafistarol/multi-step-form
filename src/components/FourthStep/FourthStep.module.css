@@ -49,6 +49,8 @@
   font-weight: var(--regular-weigth);
   text-decoration: underline;
   cursor: pointer;
+  border: none;
+  background: transparent;
 }
 
 .changeLink:hover {

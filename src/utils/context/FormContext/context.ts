@@ -15,6 +15,8 @@ export type TFormContext = {
   formData: TFormData
   updateFormData: (data: Partial<TFormData>) => void
   resetForm: () => void
+  confirmed: boolean
+  setConfirmed: (value: boolean) => void
 }
 
 /**

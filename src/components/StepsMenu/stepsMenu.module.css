@@ -25,9 +25,9 @@ li {
   gap: 1rem;
 }
 
-button,
-button:hover,
-button:active {
+.stepsButton,
+.stepsButton:hover,
+.stepsButton:active {
   height: 2.125rem;
   width: 2.125rem;
   border-radius: 50%;
@@ -40,8 +40,8 @@ button:active {
 }
 
 .active,
-button.active:hover,
-button.active:active {
+.stepsButton.active:hover,
+.stepsButton.active:active {
   background-color: var(--primary-blue-200);
   border-color: var(--primary-blue-200);
   color: var(--primary-blue-950);

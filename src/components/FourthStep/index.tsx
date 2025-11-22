@@ -1,5 +1,6 @@
 import { useFormContext } from '@utils/context/FormContext/useFormContext'
 import { JSX } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './FourthStep.module.css'
 
 /**
@@ -9,6 +10,7 @@ import styles from './FourthStep.module.css'
  */
 export default function FourthStep(): JSX.Element {
   const { formData } = useFormContext()
+  const navigate = useNavigate()
 
   const plansAndPrices = {
     arcade: 9,
@@ -31,9 +33,9 @@ export default function FourthStep(): JSX.Element {
               {formData.plan} {formData.recurrence === 'yearly' ? '(Yearly)' : '(Monthly)'}
             </span>
 
-            <a className={styles.changeLink} href="/step-1">
+            <button type="button" className={styles.changeLink} onClick={() => navigate('/step-2')}>
               Change
-            </a>
+            </button>
           </div>
 
           <span className={styles.planPrice}>
@@ -43,20 +45,24 @@ export default function FourthStep(): JSX.Element {
           </span>
         </div>
 
-        {formData.addons.length > 0 && <div className={styles.planDivider} />}
-
-        <div className={styles.addOnsSummary}>
-          {formData.addons.map((addon) => (
-            <div key={addon} className={styles.addOnItem}>
-              <span className={styles.addOnName}>{addon.replace(/-/g, ' ')}</span>
-              <span className={styles.addOnPrice}>
-                {formData.recurrence === 'yearly'
-                  ? `+$${addonsAndPrices[addon as keyof typeof addonsAndPrices] * 10}/yr`
-                  : `+$${addonsAndPrices[addon as keyof typeof addonsAndPrices]}/mo`}
-              </span>
+        {formData.addons.length > 0 && (
+          <>
+            {' '}
+            <div className={styles.planDivider} />
+            <div className={styles.addOnsSummary}>
+              {formData.addons.map((addon) => (
+                <div key={addon} className={styles.addOnItem}>
+                  <span className={styles.addOnName}>{addon.replace(/-/g, ' ')}</span>
+                  <span className={styles.addOnPrice}>
+                    {formData.recurrence === 'yearly'
+                      ? `+$${addonsAndPrices[addon as keyof typeof addonsAndPrices] * 10}/yr`
+                      : `+$${addonsAndPrices[addon as keyof typeof addonsAndPrices]}/mo`}
+                  </span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
 
       <div className={styles.totalContainer}>

@@ -1,4 +1,6 @@
-import { JSX } from 'react'
+import { JSX, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useFormContext } from '@utils/context/FormContext/useFormContext'
 import StepsMenu from '@components/StepsMenu'
 import styles from './ThankYou.module.css'
 
@@ -8,10 +10,35 @@ import styles from './ThankYou.module.css'
  * @returns {JSX.Element} The JSX element representing the ThankYou component.
  */
 export default function ThankYou(): JSX.Element {
+  const { formData, confirmed } = useFormContext()
+  const navigate = useNavigate()
+
+  // Function to get the allowed step based on form data
+  const getAllowedStep = (): number => {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
+      return 1
+    }
+
+    if (!formData.plan) {
+      return 2
+    }
+
+    return 4
+  }
+
+  // UseEffect to redirect to the correct step
+  useEffect(() => {
+    const allowed = getAllowedStep()
+
+    if (allowed !== 4 || !confirmed) {
+      navigate(`/step-${allowed}`, { replace: true })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formData, confirmed, navigate])
+
   return (
     <div className={styles.stepContainer}>
       <StepsMenu />
-
       <section className={styles.stepsContentSection}>
         <div className={styles.stepsContentDiv}>
           <div className={styles.stepsContent}>
