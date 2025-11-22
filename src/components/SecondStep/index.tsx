@@ -39,7 +39,7 @@ export default function SecondStep({
   }, [needValidateToNextStep])
 
   return (
-    <form className={styles.secondStep} noValidate>
+    <div className={styles.secondStep}>
       <div className={styles.planContainer}>
         {Object.entries(plansAndPrices).map(([key, value]) => {
           const checked = formData.plan === key
@@ -85,6 +85,6 @@ export default function SecondStep({
 
         <span className={formData.recurrence === 'yearly' ? styles.switchTextChecked : ''}>Yearly</span>
       </div>
-    </form>
+    </div>
   )
 }

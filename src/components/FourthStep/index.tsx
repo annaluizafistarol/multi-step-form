@@ -25,7 +25,7 @@ export default function FourthStep(): JSX.Element {
   }
 
   return (
-    <form className={styles.fourthStep} noValidate>
+    <div className={styles.fourthStep}>
       <div className={styles.summaryContainer}>
         <div className={styles.planSummary}>
           <div className={styles.planInfo}>
@@ -82,6 +82,6 @@ export default function FourthStep(): JSX.Element {
               }/mo`}
         </span>
       </div>
-    </form>
+    </div>
   )
 }

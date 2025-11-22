@@ -35,7 +35,7 @@ export default function ThirdStep(): JSX.Element {
   ]
 
   return (
-    <form className={styles.thirdStep} noValidate>
+    <div className={styles.thirdStep}>
       {addons.map((addon) => {
         const checked = formData.addons.includes(addon.key)
 
@@ -72,6 +72,6 @@ export default function ThirdStep(): JSX.Element {
           </label>
         )
       })}
-    </form>
+    </div>
   )
 }

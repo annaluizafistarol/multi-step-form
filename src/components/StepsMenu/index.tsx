@@ -39,6 +39,7 @@ export default function StepsMenu(): JSX.Element {
                   className={
                     currentStep === step.stepNumber ? style.active + ' ' + style.stepsButton : style.stepsButton
                   }
+                  type="button"
                 >
                   {step.stepNumber}
                 </button>
@@ -62,6 +63,7 @@ export default function StepsMenu(): JSX.Element {
                   className={
                     currentStep === step.stepNumber ? style.active + ' ' + style.stepsButton : style.stepsButton
                   }
+                  type="button"
                 >
                   {step.stepNumber}
                 </button>

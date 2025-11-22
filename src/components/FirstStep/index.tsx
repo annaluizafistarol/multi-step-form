@@ -67,7 +67,7 @@ export default function FirstStep({
   }
 
   return (
-    <form className={styles.firstStep} noValidate>
+    <div className={styles.firstStep}>
       {/* Name */}
       <div className={styles.formGroup}>
         <div className={styles.headForm}>
@@ -118,6 +118,6 @@ export default function FirstStep({
           style={errors.phone ? { border: '1px solid red' } : {}}
         />
       </div>
-    </form>
+    </div>
   )
 }
