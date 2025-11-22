@@ -1,10 +1,11 @@
 .stepContainer {
   display: flex;
-  background: #ffffff;
+  background: var(--neutral-white);
   border-radius: 14px;
   padding: 1rem;
   flex-direction: row;
   width: 940px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .stepsContentSection {
@@ -63,6 +64,7 @@
     flex-direction: column;
     width: 100%;
     height: 100vh;
+    box-shadow: none;
   }
 
   .stepsContentSection {
