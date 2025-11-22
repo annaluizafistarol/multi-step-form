@@ -25,7 +25,9 @@ li {
   gap: 1rem;
 }
 
-button {
+button,
+button:hover,
+button:active {
   height: 2.125rem;
   width: 2.125rem;
   border-radius: 50%;
@@ -34,10 +36,12 @@ button {
   color: var(--neutral-blue-50);
   border: 1px solid var(--neutral-blue-50);
   font-size: 0.875rem;
+  user-select: none;
 }
 
-button:active,
-.active {
+.active,
+button.active:hover,
+button.active:active {
   background-color: var(--primary-blue-200);
   border-color: var(--primary-blue-200);
   color: var(--primary-blue-950);
@@ -47,6 +51,7 @@ button:active,
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
+  user-select: none;
 }
 
 h3 {
@@ -54,6 +59,7 @@ h3 {
   text-transform: uppercase;
   font-size: 0.75rem;
   font-weight: var(--regular-weigth);
+  user-select: none;
 }
 
 p {
