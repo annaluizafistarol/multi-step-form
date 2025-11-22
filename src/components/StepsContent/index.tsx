@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { JSX, useState } from 'react'
 import FirstStep from '@components/FirstStep'
 import SecondStep from '@components/SecondStep'
+import ThirdStep from '@components/ThirdStep'
 import styles from './stepsContent.module.css'
 
 /**
@@ -78,8 +79,8 @@ export default function StepsContent(): JSX.Element {
     {
       stepTitle: 'Pick add-ons',
       stepDescription: 'Add-ons help enhance your gaming experience.',
-      children: <div />,
-      validate: () => formData.addons.length > 0,
+      children: <ThirdStep />,
+      validate: () => true,
     },
     {
       stepTitle: 'Finishing up',
