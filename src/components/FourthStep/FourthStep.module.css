@@ -2,8 +2,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding-bottom: 24px;
+  gap: 1.875rem;
+  padding-bottom: 1.5rem;
 }
 
 .summaryContainer {
@@ -12,9 +12,9 @@
   flex-direction: column;
   align-items: center;
   background-color: var(--neutral-blue-100);
-  padding: 24px;
+  padding: 1.5rem;
   border-radius: 8px;
-  gap: 20px;
+  gap: 1.25rem;
 }
 
 .planSummary {
@@ -24,7 +24,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .planInfo {
@@ -33,19 +33,19 @@
   justify-content: space-between;
   align-items: flex-start;
   text-align: left;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .planName {
   color: var(--primary-blue-950);
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: var(--medium-weigth);
   text-transform: capitalize;
 }
 
 .changeLink {
   color: var(--neutral-grey-500);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: var(--regular-weigth);
   text-decoration: underline;
   cursor: pointer;
@@ -59,7 +59,7 @@
 
 .planPrice {
   color: var(--primary-blue-950);
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: var(--medium-weigth);
 }
 
@@ -67,13 +67,13 @@
   height: 1px;
   width: 100%;
   background-color: var(--neutral-purple-200);
-  margin-top: 4px;
+  margin-top: 0.25rem;
 }
 
 .addOnsSummary {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
   width: 100%;
   justify-content: space-between;
 }
@@ -86,14 +86,14 @@
 
 .addOnName {
   color: var(--neutral-grey-500);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: var(--regular-weigth);
   text-transform: capitalize;
 }
 
 .addOnPrice {
   color: var(--primary-blue-950);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: var(--regular-weigth);
 }
 
@@ -101,46 +101,46 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 1.5rem;
 }
 
 .totalLabel {
   color: var(--neutral-grey-500);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: var(--regular-weigth);
 }
 
 .totalPrice {
   color: #5f77ef;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: var(--bold-weigth);
 }
 
 /* Responsive Design | Mobile */
 @media (max-width: 768px) {
   .thirdStep {
-    gap: 12px;
+    gap: 0.75rem;
   }
 
   .summaryContainer {
-    gap: 12px;
-    padding: 16px;
+    gap: 0.75rem;
+    padding: 1rem;
   }
 
   .planInfo {
-    gap: 4px;
+    gap: 0.25rem;
   }
 
   .addOnsSummary {
-    gap: 20px;
+    gap: 1.25rem;
   }
 
   .totalContainer {
-    padding: 0 16px;
+    padding: 0 1rem;
   }
 
   .totalPrice {
     color: #5446e3;
-    font-size: 16px;
+    font-size: 1rem;
   }
 }

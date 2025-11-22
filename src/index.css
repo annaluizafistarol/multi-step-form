@@ -14,7 +14,7 @@
 :root {
   /* TYPOGRAPHY */
   --font-ubuntu: 'Ubuntu', sans-serif;
-  --size-font: 16px; /* Paragraph */
+  --size-font: 1rem; /* Paragraph */
   --regular-weigth: 400;
   --medium-weigth: 500;
   --bold-weigth: 700;
