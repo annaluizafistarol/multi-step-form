@@ -1,4 +1,3 @@
-import { Box } from '@mui/material'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { JSX } from 'react'
 import StepContainer from '@components/StepContainer'
@@ -25,8 +24,6 @@ export default function App(): JSX.Element {
 
             <Route path="/thank-you" element={<ThankYou />} />
           </Routes>
-
-          <Box className="background-box" />
         </FormProvider>
       </div>
     </Router>

@@ -6,11 +6,11 @@
   box-sizing: border-box;
 }
 
-/*
-  The designs were created to the following widths:
+/* The designs were created to the following widths:
     - Mobile: 375px
     - Desktop: 1440px
 */
+
 :root {
   /* TYPOGRAPHY */
   --font-ubuntu: 'Ubuntu', sans-serif;
@@ -19,7 +19,7 @@
   --medium-weigth: 500;
   --bold-weigth: 700;
 
-  --background-color: #eef5ff;
+  --background-color: #f0f5ff;
 
   /* PRIMARY COLORS */
   --primary-blue-950: #02295a;
